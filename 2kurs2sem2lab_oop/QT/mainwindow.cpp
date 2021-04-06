@@ -3,7 +3,6 @@
 #include "time.h"
 #include "string"
 #include "sorts.h"
-#include "QMessageBox"
 #include "QtDebug"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,7 +19,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    if (ui->listWidget_2->count()<32767)
     ui->listWidget_2->addItem(ui->spinBox->text());
+    else qDebug() << "ERROR\n";
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -37,11 +38,6 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     ui->listWidget_2->clear();
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-
 }
 
 void MainWindow::on_pushButton_3_clicked()
