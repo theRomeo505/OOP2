@@ -1,0 +1,124 @@
+\hypertarget{classsort_class}{}\doxysection{sort\+Class Class Reference}
+\label{classsort_class}\index{sortClass@{sortClass}}
+
+
+{\ttfamily \#include $<$sorts.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{classsort_class_aa430ecc00979c4d975a22bf57077bdd3}{generate\+Data}} (int n, int range)
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{classsort_class_a99a99ee43a7db7ec453fd994b00142f9}{naive}} (vector$<$ int $>$ arr)
+\item 
+void \mbox{\hyperlink{classsort_class_a7895a903a3c33a73d5eb425cb4d603fe}{bubble\+Sort}} (vector$<$ int $>$ \&arr)
+\item 
+void \mbox{\hyperlink{classsort_class_a2aa0ffa7134b47a7b9bb40361827daff}{Shaker\+Sort}} (vector$<$ int $>$ \&a)
+\item 
+void \mbox{\hyperlink{classsort_class_a78c7145bd9021b063607ce688aebf055}{heap\+Sort}} (vector$<$ int $>$ \&arr)
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{classsort_class_ad4d84e948e7c9a039104e50ff4bcc696}{quick\+Sort}} (vector$<$ int $>$ \&arr, int low, int high)
+\item 
+float \mbox{\hyperlink{classsort_class_a188f3a9ee4ab6638b0547e1cabd70146}{difference}} (vector$<$ int $>$ \&data, string s1, string s2)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to contain all sort and timechecking functions 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsort_class_a7895a903a3c33a73d5eb425cb4d603fe}\label{classsort_class_a7895a903a3c33a73d5eb425cb4d603fe}} 
+\index{sortClass@{sortClass}!bubbleSort@{bubbleSort}}
+\index{bubbleSort@{bubbleSort}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{bubbleSort()}{bubbleSort()}}
+{\footnotesize\ttfamily void sort\+Class\+::bubble\+Sort (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for sorting vector by bubble algorythm 
+\begin{DoxyParams}{Parameters}
+{\em arr} & -\/ vector of int \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsort_class_a188f3a9ee4ab6638b0547e1cabd70146}\label{classsort_class_a188f3a9ee4ab6638b0547e1cabd70146}} 
+\index{sortClass@{sortClass}!difference@{difference}}
+\index{difference@{difference}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{difference()}{difference()}}
+{\footnotesize\ttfamily float sort\+Class\+::difference (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{data,  }\item[{string}]{s1,  }\item[{string}]{s2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for finding the difference between evaluating time of 2 algorythms 
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ vector of int \\
+\hline
+{\em s1} & -\/ first type of sort \\
+\hline
+{\em s2} & -\/ second type of sort \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+difference between working time of second algorythm -\/ first one 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsort_class_aa430ecc00979c4d975a22bf57077bdd3}\label{classsort_class_aa430ecc00979c4d975a22bf57077bdd3}} 
+\index{sortClass@{sortClass}!generateData@{generateData}}
+\index{generateData@{generateData}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{generateData()}{generateData()}}
+{\footnotesize\ttfamily vector$<$int$>$ sort\+Class\+::generate\+Data (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{int}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for generating vector of int 
+\begin{DoxyParams}{Parameters}
+{\em n} & -\/ count of numbers \\
+\hline
+{\em range} & -\/ maximum number \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsort_class_a78c7145bd9021b063607ce688aebf055}\label{classsort_class_a78c7145bd9021b063607ce688aebf055}} 
+\index{sortClass@{sortClass}!heapSort@{heapSort}}
+\index{heapSort@{heapSort}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{heapSort()}{heapSort()}}
+{\footnotesize\ttfamily void sort\+Class\+::heap\+Sort (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for sorting vector by heap algoruthm 
+\begin{DoxyParams}{Parameters}
+{\em arr} & -\/ vector of int \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsort_class_a99a99ee43a7db7ec453fd994b00142f9}\label{classsort_class_a99a99ee43a7db7ec453fd994b00142f9}} 
+\index{sortClass@{sortClass}!naive@{naive}}
+\index{naive@{naive}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{naive()}{naive()}}
+{\footnotesize\ttfamily vector$<$int$>$ sort\+Class\+::naive (\begin{DoxyParamCaption}\item[{vector$<$ int $>$}]{arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for sorting vector by finding the lowest int (size) times 
+\begin{DoxyParams}{Parameters}
+{\em arr} & -\/ vector of int \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsort_class_ad4d84e948e7c9a039104e50ff4bcc696}\label{classsort_class_ad4d84e948e7c9a039104e50ff4bcc696}} 
+\index{sortClass@{sortClass}!quickSort@{quickSort}}
+\index{quickSort@{quickSort}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{quickSort()}{quickSort()}}
+{\footnotesize\ttfamily vector$<$int$>$ sort\+Class\+::quick\+Sort (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{arr,  }\item[{int}]{low,  }\item[{int}]{high }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for sorting vector by quicksort akgorythm 
+\begin{DoxyParams}{Parameters}
+{\em arr} & -\/ vector of int \\
+\hline
+{\em low} & -\/ start point \\
+\hline
+{\em high} & -\/ end point \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsort_class_a2aa0ffa7134b47a7b9bb40361827daff}\label{classsort_class_a2aa0ffa7134b47a7b9bb40361827daff}} 
+\index{sortClass@{sortClass}!ShakerSort@{ShakerSort}}
+\index{ShakerSort@{ShakerSort}!sortClass@{sortClass}}
+\doxysubsubsection{\texorpdfstring{ShakerSort()}{ShakerSort()}}
+{\footnotesize\ttfamily void sort\+Class\+::\+Shaker\+Sort (\begin{DoxyParamCaption}\item[{vector$<$ int $>$ \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method for sorting vector by shaker(cocktail) algorythm 
+\begin{DoxyParams}{Parameters}
+{\em arr} & -\/ vector of int \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+sorts.\+h\end{DoxyCompactItemize}
