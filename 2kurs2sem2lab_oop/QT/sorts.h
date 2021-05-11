@@ -2,6 +2,7 @@
 #include <vector>
 #include "time.h"
 #include <chrono>
+#include <thread>
 #include "doctest/doctest.h"
 #define DOCTEST_CONFIG_IMPLEMENT_WITHOUT_MAIN
 
@@ -13,10 +14,11 @@ void show(vector<int> m) {
     cout << endl;
 }
 /**
-* Class to contain all sort and timechecking functions 
+* Class to contain all sort and timechecking functions
 */
 class sortClass {
 public:
+
     /**
     * Method for generating vector of int
     * \param n - count of numbers
@@ -110,7 +112,7 @@ public:
    * Method for sorting vector by quicksort akgorythm
    * \param arr - vector of int
    * \param low - start point
-   * \param high - end point 
+   * \param high - end point
    */
     vector<int> quickSort(vector<int> &arr, int low, int high)
     {
@@ -150,33 +152,41 @@ public:
     float difference(vector<int> &data, string s1, string s2) {
         vector<int> data1 = data;
         float dur1 = 0, dur2 = 0;
+        std::thread first_thread;
+        std::thread second_thread;
+
+
        if (s1=="bubble")
        {
-           
+
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           bubbleSort(data);
+           //bubbleSort(data);
+           first_thread=std::thread (bubbleSort,data);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur1 = std::chrono::duration<float,std::milli>(end - start).count();
-           
+
        }
        else if (s1 == "shaker") {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           ShakerSort(data);
+           //ShakerSort(data);
+           first_thread=std::thread(ShakerSort,data);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur1 = std::chrono::duration<float, std::milli>(end - start).count();
        }
        else if (s1 == "heap") {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           heapSort(data);
+           //heapSort(data);
+           first_thread=std::thread(heapSort,data);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur1 = std::chrono::duration<float, std::milli>(end - start).count();
        }
        else if (s1 == "quick") {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           quickSort(data,0,data.size()-1);
+          // quickSort(data,0,data.size()-1);
+           first_thread=std::thread(quickSort,data,0,data.size()-1);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur1 = std::chrono::duration<float, std::milli>(end - start).count();
@@ -185,7 +195,8 @@ public:
        if (s2 == "bubble")
        {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           bubbleSort(data1);
+          // bubbleSort(data1);
+           second_thread=std::thread (bubbleSort,data1);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur2 = std::chrono::duration<float, std::milli>(end - start).count();
@@ -193,25 +204,31 @@ public:
        }
        else if (s2 == "shaker") {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           ShakerSort(data1);
+           //ShakerSort(data1);
+           second_thread=std::thread(ShakerSort,data1);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur2 = std::chrono::duration<float, std::milli>(end - start).count();
        }
        else if (s2 == "heap") {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           heapSort(data1);
+           //heapSort(data1);
+           second_thread=std::thread (heapSort,data1);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
            dur2 = std::chrono::duration<float, std::milli>(end - start).count();
        }
        else if (s2 == "quick") {
            std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-           quickSort(data1,0,data1.size()-1);
+           //quickSort(data1,0,data1.size()-1);
+           second_thread=std::thread (quickSort,data1,0,data.size()-1);
            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             dur2 = std::chrono::duration<float, std::milli>(end - start).count();
        }
+       first_thread.join();
+       second_thread.join();
+
        cout << dur1 << ' ' << dur2 << endl;
        return dur2 - dur1;
     }
@@ -242,7 +259,7 @@ public:
                 mswap(arr[i], arr[largest]);
                 heapify(arr, n, largest);
             }
-            
+
         }
         template <typename T>
         void mswap(T& x, T& y)
@@ -251,7 +268,7 @@ public:
             x = y;
             y = temp;
         }
-        
+
 };
 TEST_CASE("bubble") {
     sortClass sort;
