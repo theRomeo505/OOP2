@@ -37,7 +37,8 @@ private slots:
     Function that shows difference in time between listWidget_5 and listWidget_4 sorts (listWidget_5 time - listWidget_4 time) in ms
 */
     void on_pushButton_6_clicked();
-
+    void add_items_to_lw2(int num);
+    void old_func();
 private:
     Ui::MainWindow *ui;
 };

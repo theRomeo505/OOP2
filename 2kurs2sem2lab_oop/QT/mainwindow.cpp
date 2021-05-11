@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "time.h"
+#include <thread>
+#include <mutex>
 #include "string"
+#include <vector>
 #include "sorts.h"
 #include "QtDebug"
 MainWindow::MainWindow(QWidget *parent)
@@ -23,9 +26,12 @@ void MainWindow::on_pushButton_clicked()
     ui->listWidget_2->addItem(ui->spinBox->text());
     else qDebug() << "ERROR\n";
 }
-
-void MainWindow::on_pushButton_4_clicked()
-{
+void MainWindow::add_items_to_lw2(int num){
+    for (int i=0; i<num;i++){
+         ui->listWidget_2->addItem(QString::fromStdString(std::to_string(rand()%32767)));
+    }
+}
+void MainWindow::old_func(){
     ui->listWidget_2->clear();
     srand(time(NULL));
     if (ui->spinBox_2->value()>0){
@@ -33,6 +39,23 @@ void MainWindow::on_pushButton_4_clicked()
             ui->listWidget_2->addItem(QString::fromStdString(std::to_string(rand()%32767)));
         }
     }
+}
+void MainWindow::on_pushButton_4_clicked()
+{
+    unsigned num_of_threads=std::thread::hardware_concurrency();
+    int s=1;
+    int size=ui->spinBox_2->value()/num_of_threads;
+    if (size*num_of_threads!=ui->spinBox_2->value()) s= ui->spinBox_2->value()-size*num_of_threads;
+    std::vector<std::thread> threads(num_of_threads);
+    for (int i=0;i<num_of_threads;i++){
+        if (s!=0){
+        threads[i]=std::thread(add_items_to_lw2,size+1);
+        s--;
+        }
+        else
+            threads[i]=std::thread(add_items_to_lw2,size);
+    }
+   // old_func();
 }
 
 void MainWindow::on_pushButton_5_clicked()
