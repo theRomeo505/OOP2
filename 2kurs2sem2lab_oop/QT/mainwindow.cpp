@@ -77,6 +77,7 @@ void MainWindow::on_pushButton_3_clicked()
             case 1: temp.ShakerSort(data) ;break; //shaker
             case 2: temp.heapSort(data) ;break; //heap
             case 3: temp.quickSort(data,0,data.size()-1) ;break; //quick
+            case 4: temp.mergeSort(data,0,data.size()-1); break; // merge
             }
             ui->listWidget_2->clear();
             for (int i=0;i<data.size();i++){

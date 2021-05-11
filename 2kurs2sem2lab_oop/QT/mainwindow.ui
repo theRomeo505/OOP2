@@ -115,6 +115,11 @@
        <string>quick</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>merge</string>
+      </property>
+     </item>
     </widget>
     <widget class="QListWidget" name="listWidget_2">
      <property name="geometry">
@@ -214,6 +219,11 @@
        <string>quick</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>merge</string>
+      </property>
+     </item>
     </widget>
     <widget class="QListWidget" name="listWidget_5">
      <property name="geometry">
@@ -242,6 +252,11 @@
      <item>
       <property name="text">
        <string>quick</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>merge</string>
       </property>
      </item>
     </widget>
