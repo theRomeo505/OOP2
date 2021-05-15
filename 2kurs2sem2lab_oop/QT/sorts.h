@@ -18,7 +18,78 @@ void show(vector<int> m) {
 */
 class sortClass {
 public:
+    void merge(vector<int> arr, int l, int m, int r)
+    {
+        int n1 = m - l + 1;
+        int n2 = r - m;
 
+        vector<int> L(n1);
+        vector<int> R(n2);
+
+        for (int i = 0; i < n1; i++)
+            L[i] = arr[l + i];
+        for (int j = 0; j < n2; j++)
+            R[j] = arr[m + 1 + j];
+        int i = 0;
+
+        int j = 0;
+
+        int k = l;
+
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            }
+            else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+    void mergeSort(vector<int> arr,int l,int r){
+        if(l>=r){
+            return;//returns recursively
+        }
+        int m =l+ (r-l)/2;
+        mergeSort(arr,l,m);
+        mergeSort(arr,m+1,r);
+        merge(arr,l,m,r);
+    }
+    void* merges(vector<int> arr, int low, int high)
+    {
+        int mid = low + (high - low) / 2;
+        if (low < high) {
+            mergeSort(arr,low, mid);
+            mergeSort(arr,mid + 1, high);
+            merge(arr,low, mid, high);
+        }
+    }
+    void initMerge(vector<int> arr){
+        int num_of_threads=4;
+        vector<thread> threads(num_of_threads);
+        for (int i=0;i<num_of_threads;i++){
+        int low = i * (arr.size() / num_of_threads);
+        int high = (i + 1) * (arr.size() / num_of_threads) - 1;
+        threads[i]=std::thread(merges,arr,low,high);
+        }
+        for (int i = 0; i < 4; i++)
+                threads[i].join();
+        merge(arr,0, (arr.size() / 2 - 1) / 2, arr.size() / 2 - 1);
+            merge(arr,arr.size() / 2, arr.size()/2 + (arr.size()-1-arr.size()/2)/2, arr.size() - 1);
+            merge(arr,0, (arr.size() - 1)/2, arr.size() - 1);
+    }
     /**
     * Method for generating vector of int
     * \param n - count of numbers
@@ -191,40 +262,52 @@ public:
 
             dur1 = std::chrono::duration<float, std::milli>(end - start).count();
        }
+       else if (s1 == "merge"){
+           std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+           first_thread=std::thread(mergeSort,data,0,data.size()-1);
+           std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+           dur1 = std::chrono::duration<float, std::milli>(end - start).count();
+       }
 
        if (s2 == "bubble")
        {
-           std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point start1 = std::chrono::steady_clock::now();
           // bubbleSort(data1);
            second_thread=std::thread (bubbleSort,data1);
-           std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
 
-            dur2 = std::chrono::duration<float, std::milli>(end - start).count();
+            dur2 = std::chrono::duration<float, std::milli>(end1 - start1).count();
 
        }
        else if (s2 == "shaker") {
-           std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point start1 = std::chrono::steady_clock::now();
            //ShakerSort(data1);
            second_thread=std::thread(ShakerSort,data1);
-           std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
 
-            dur2 = std::chrono::duration<float, std::milli>(end - start).count();
+            dur2 = std::chrono::duration<float, std::milli>(end1 - start1).count();
        }
        else if (s2 == "heap") {
-           std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point start1 = std::chrono::steady_clock::now();
            //heapSort(data1);
            second_thread=std::thread (heapSort,data1);
-           std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
 
-           dur2 = std::chrono::duration<float, std::milli>(end - start).count();
+           dur2 = std::chrono::duration<float, std::milli>(end1 - start1).count();
        }
        else if (s2 == "quick") {
-           std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point start1 = std::chrono::steady_clock::now();
            //quickSort(data1,0,data1.size()-1);
            second_thread=std::thread (quickSort,data1,0,data.size()-1);
-           std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+           std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
 
-            dur2 = std::chrono::duration<float, std::milli>(end - start).count();
+            dur2 = std::chrono::duration<float, std::milli>(end1 - start1).count();
+       }
+       else if (s2 == "merge"){
+           std::chrono::steady_clock::time_point start1 = std::chrono::steady_clock::now();
+           first_thread=std::thread(mergeSort,data1,0,data.size()-1);
+           std::chrono::steady_clock::time_point end1 = std::chrono::steady_clock::now();
+           dur2 = std::chrono::duration<float, std::milli>(end1 - start1).count();
        }
        first_thread.join();
        second_thread.join();
@@ -309,4 +392,14 @@ TEST_CASE("quick") {
         CHECK(a[i] == b[i]);
     }
 
+}
+TEST_CASE ("merge multi and default"){
+    sortClass sort;
+    vector<int> a=sort.generateData(100,300);
+    vector<int> b=a;
+    sort.mergeSort(a,0,a.size()-1);
+    sort.initMerge(b);
+    for (int i = 0; i < a.size(); i++) {
+        CHECK(a[i] == b[i]);
+    }
 }
